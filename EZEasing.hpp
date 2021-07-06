@@ -198,35 +198,35 @@ namespace eze {
 
 	// Elastic
 	template <typename T>
-	T easeIn(T start, T end, float ratio) {
-
+	T easeInElastic(T start, T end, float ratio) {
+		return map(start, end, easeInElastic(ratio));
 	}
 
 	template <typename T>
-	T easeOut(T start, T end, float ratio) {
-
+	T easeOutElastic(T start, T end, float ratio) {
+		return map(start, end, easeOutElastic(ratio));
 	}
 
 	template <typename T>
-	T easeInOut(T start, T end, float ratio) {
-
+	T easeInOutElastic(T start, T end, float ratio) {
+		return map(start, end, easeInOutElastic(ratio));
 	}
 	// Elatic
 
 	// Bounce
 	template <typename T>
-	T easeIn(T start, T end, float ratio) {
-
+	T easeInBounce(T start, T end, float ratio) {
+		return map(start, end, easeInBounce(ratio));
 	}
 
 	template <typename T>
-	T easeOut(T start, T end, float ratio) {
-
+	T easeOutBounce(T start, T end, float ratio) {
+		return map(start, end, easeOutBounce(ratio));
 	}
 
 	template <typename T>
-	T easeInOut(T start, T end, float ratio) {
-
+	T easeInOutBounce(T start, T end, float ratio) {
+		return map(start, end, easeInOutBounce(ratio));
 	}
 	// Bounce
 }
