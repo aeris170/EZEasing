@@ -1,181 +1,188 @@
 #include "EZEasing.hpp"
+
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <cmath>
+
 namespace eze {
 
-	float easeLinear(float ratio) {
-		return ratio;
-	}
+    constexpr static float PI { static_cast<float>(M_PI) };
 
-	float easeInSine(float ratio) {
-		return 1 - cos((ratio * M_PI) / 2);
-	}
+    float easeLinear(float ratio) {
+        return ratio;
+    }
 
-	float easeOutSine(float ratio) {
-		return sin((ratio * M_PI) / 2);
-	}
+    float easeInSine(float ratio) {
+        return 1.0f - cos((ratio * PI) / 2.0f);
+    }
 
-	float easeInOutSine(float ratio) {
-		return -cos(((ratio * M_PI) - 1) / 2);
-	}
+    float easeOutSine(float ratio) {
+        return sin((ratio * PI) / 2.0f);
+    }
 
-	float easeInQuad(float ratio) {
-		return ratio * ratio;
-	}
+    float easeInOutSine(float ratio) {
+        return -cos(((ratio * PI) - 1.0f) / 2.0f);
+    }
 
-	float easeOutQuad(float ratio) {
-		return 1 - (1 - ratio) * (1 - ratio);
-	}
+    float easeInQuad(float ratio) {
+        return ratio * ratio;
+    }
 
-	float easeInOutQuad(float ratio) {
-		return ratio < 0.5 ? 2 * ratio * ratio : 1 - pow(-2 * ratio + 2, 2) / 2;
-	}
+    float easeOutQuad(float ratio) {
+        return 1.0f - (1.0f - ratio) * (1.0f - ratio);
+    }
 
-	float easeInCubic(float ratio) {
-		return ratio * ratio * ratio;
-	}
+    float easeInOutQuad(float ratio) {
+        return ratio < 0.5f ? 2.0f * ratio * ratio : 1.0f - pow(-2.0f * ratio + 2.0f, 2.0f) / 2.0f;
+    }
 
-	float easeOutCubic(float ratio) {
-		return 1 - pow(1 - ratio, 3);
-	}
+    float easeInCubic(float ratio) {
+        return ratio * ratio * ratio;
+    }
 
-	float easeInOutCubic(float ratio) {
-		return ratio < 0.5 ? 4 * ratio * ratio * ratio : 1 - pow(-2 * ratio + 2, 3) / 2;
-	}
+    float easeOutCubic(float ratio) {
+        return 1.0f - pow(1.0f - ratio, 3.0f);
+    }
 
-	float easeInQuart(float ratio) {
-		return ratio * ratio * ratio * ratio;
-	}
+    float easeInOutCubic(float ratio) {
+        return ratio < 0.5f ? 4.0f * ratio * ratio * ratio : 1.0f - pow(-2.0f * ratio + 2.0f, 3.0f) / 2.0f;
+    }
 
-	float easeOutQuart(float ratio) {
-		return 1 - pow(1 - ratio, 4);
-	}
+    float easeInQuart(float ratio) {
+        return ratio * ratio * ratio * ratio;
+    }
 
-	float easeInOutQuart(float ratio) {
-		return ratio < 0.5 ? 8 * ratio * ratio * ratio * ratio : 1 - pow(-2 * ratio + 2, 4) / 2;
-	}
+    float easeOutQuart(float ratio) {
+        return 1.0f - pow(1.0f - ratio, 4.0f);
+    }
 
-	float easeInQuint(float ratio) {
-		return ratio * ratio * ratio * ratio * ratio;
-	}
+    float easeInOutQuart(float ratio) {
+        return ratio < 0.5f ? 8.0f * ratio * ratio * ratio * ratio : 1.0f - pow(-2.0f * ratio + 2.0f, 4.0f) / 2.0f;
+    }
 
-	float easeOutQuint(float ratio) {
-		return 1 - pow(1 - ratio, 5);
-	}
+    float easeInQuint(float ratio) {
+        return ratio * ratio * ratio * ratio * ratio;
+    }
 
-	float easeInOutQuint(float ratio) {
-		return ratio < 0.5 ? 16 * ratio * ratio * ratio * ratio * ratio : 1 - pow(-2 * ratio + 2, 5) / 2;
-	}
+    float easeOutQuint(float ratio) {
+        return 1.0f - pow(1.0f - ratio, 5.0f);
+    }
 
-
-	float easeInExpo(float ratio) {
-		return ratio == 0 ? 0 : pow(2, 10 * ratio - 10);
-	}
-
-	float easeOutExpo(float ratio) {
-		return ratio == 1 ? 1 : 1 - pow(2, -10 * ratio);
-	}
-
-	float easeInOutExpo(float ratio) {
-		return ratio == 0
-			? 0
-			: ratio == 1
-			? 1
-			: ratio < 0.5 ? pow(2, 20 * ratio - 10) / 2
-			: (2 - pow(2, -20 * ratio + 10)) / 2;
-	}
-
-	float easeInCirc(float ratio) {
-		return 1 - sqrt(1 - pow(ratio, 2));
-	}
-
-	float easeOutCirc(float ratio) {
-		return sqrt(1 - pow(ratio - 1, 2));
-	}
-
-	float easeInOutCirc(float ratio) {
-		return ratio < 0.5
-			? (1 - sqrt(1 - pow(2 * ratio, 2))) / 2
-			: (sqrt(1 - pow(-2 * ratio + 2, 2)) + 1) / 2;
-	}
-
-	float easeInBack(float ratio) {
-		static const float c1 = 1.70158;
-		static const float c3 = c1 + 1;
-
-		return c3 * ratio * ratio * ratio - c1 * ratio * ratio;
-	}
-
-	float easeOutBack(float ratio) {
-		static const float c1 = 1.70158;
-		static const float c3 = c1 + 1;
-
-		return 1 + c3 * pow(ratio - 1, 3) + c1 * pow(ratio - 1, 2);
-	}
-
-	float easeInOutBack(float ratio) {
-		static const float c1 = 1.70158;
-		static const float c2 = c1 * 1.525;
-
-		return ratio < 0.5
-			? (pow(2 * ratio, 2) * ((c2 + 1) * 2 * ratio - c2)) / 2
-			: (pow(2 * ratio - 2, 2) * ((c2 + 1) * (ratio * 2 - 2) + c2) + 2) / 2;
-	}
-
-	float easeInElastic(float ratio) {
-		static const float c4 = (2 * M_PI) / 3;
-
-		return ratio == 0
-			? 0
-			: ratio == 1
-			? 1
-			: -pow(2, 10 * ratio - 10) * sin((ratio * 10 - 10.75) * c4);
-	}
-
-	float easeOutElastic(float ratio) {
-		static const float c4 = (2 * M_PI) / 3;
-
-		return ratio == 0
-			? 0
-			: ratio == 1
-			? 1
-			: pow(2, -10 * ratio) * sin((ratio * 10 - 0.75) * c4) + 1;
-	}
-
-	float easeInOutElastic(float ratio) {
-		static const float c5 = (2 * M_PI) / 4.5;
-
-		return ratio == 0
-			? 0
-			: ratio == 1
-			? 1
-			: ratio < 0.5
-			? -(pow(2, 20 * ratio - 10) * sin((20 * ratio - 11.125) * c5)) / 2
-			: (pow(2, -20 * ratio + 10) * sin((20 * ratio - 11.125) * c5)) / 2 + 1;
-	}
+    float easeInOutQuint(float ratio) {
+        return ratio < 0.5f ? 16.0f * ratio * ratio * ratio * ratio * ratio : 1.0f - pow(-2.0f * ratio + 2.0f, 5.0f) / 2.0f;
+    }
 
 
-	float easeInBounce(float ratio) {
-		return 1 - easeOutBounce(1 - ratio);
-	}
+    float easeInExpo(float ratio) {
+        return ratio == 0.0f ? 0.0f : pow(2.0f, 10.0f * ratio - 10.0f);
+    }
 
-	float easeOutBounce(float ratio) {
-		static const float n1 = 7.5625;
-		static const float d1 = 2.75;
+    float easeOutExpo(float ratio) {
+        return ratio == 1.0f ? 1.0f : 1.0f - pow(2.0f, -10.0f * ratio);
+    }
 
-		if (ratio < 1 / d1) {
-			return n1 * ratio * ratio;
-		} else if (ratio < 2 / d1) {
-			return n1 * (ratio -= 1.5 / d1) * ratio + 0.75;
-		} else if (ratio < 2.5 / d1) {
-			return n1 * (ratio -= 2.25 / d1) * ratio + 0.9375;
-		} else {
-			return n1 * (ratio -= 2.625 / d1) * ratio + 0.984375;
-		}
-	}
+    float easeInOutExpo(float ratio) {
+        return ratio == 0.0f
+            ? 0.0f
+            : ratio == 1.0f
+            ? 1.0f
+            : ratio < 0.5f ? pow(2.0f, 20.0f * ratio - 10.0f) / 2.0f
+            : (2.0f - pow(2.0f, -20.0f * ratio + 10.0f)) / 2.0f;
+    }
 
-	float easeInOutBounce(float ratio) {
-		return ratio < 0.5
-			? (1 - easeOutBounce(1 - 2 * ratio)) / 2
-			: (1 + easeOutBounce(2 * ratio - 1)) / 2;
-	}
+    float easeInCirc(float ratio) {
+        return 1.0f - sqrt(1.0f - pow(ratio, 2.0f));
+    }
+
+    float easeOutCirc(float ratio) {
+        return sqrt(1.0f - pow(ratio - 1.0f, 2.0f));
+    }
+
+    float easeInOutCirc(float ratio) {
+        return ratio < 0.5f
+            ? (1.0f - sqrt(1.0f - pow(2.0f * ratio, 2.0f))) / 2.0f
+            : (sqrt(1.0f - pow(-2.0f * ratio + 2.0f, 2.0f)) + 1.0f) / 2.0f;
+    }
+
+    float easeInBack(float ratio) {
+        static constexpr float c1 = 1.70158f;
+        static constexpr float c3 = c1 + 1.0f;
+
+        return c3 * ratio * ratio * ratio - c1 * ratio * ratio;
+    }
+
+    float easeOutBack(float ratio) {
+        static constexpr float c1 = 1.70158f;
+        static constexpr float c3 = c1 + 1.0f;
+
+        return 1.0f + c3 * pow(ratio - 1.0f, 3.0f) + c1 * pow(ratio - 1.0f, 2.0f);
+    }
+
+    float easeInOutBack(float ratio) {
+        static constexpr float c1 = 1.70158f;
+        static constexpr float c2 = c1 * 1.525f;
+
+        return ratio < 0.5
+            ? (pow(2.0f * ratio, 2.0f) * ((c2 + 1) * 2.0f * ratio - c2)) / 2.0f
+            : (pow(2.0f * ratio - 2.0f, 2.0f) * ((c2 + 1.0f) * (ratio * 2.0f - 2.0f) + c2) + 2.0f) / 2.0f;
+    }
+
+    float easeInElastic(float ratio) {
+        static constexpr float c4 = (2.0f * PI) / 3.0f;
+
+        return ratio == 0.0f
+            ? 0.0f
+            : ratio == 1.0f
+            ? 1.0f
+            : -pow(2.0f, 10.0f * ratio - 10.0f) * sin((ratio * 10.0f - 10.75f) * c4);
+    }
+
+    float easeOutElastic(float ratio) {
+        static constexpr float c4 = (2.0f * PI) / 3.0f;
+
+        return ratio == 0.0f
+            ? 0.0f
+            : ratio == 1.0f
+            ? 1.0f
+            : pow(2.0f, -10.0f * ratio) * sin((ratio * 10.0f - 0.75f) * c4) + 1.0f;
+    }
+
+    float easeInOutElastic(float ratio) {
+        static const float c5 = (2.0f * PI) / 4.5f;
+
+        return ratio == 0.0f
+            ? 0.0f
+            : ratio == 1.0f
+            ? 1.0f
+            : ratio < 0.5f
+            ? -(pow(2.0f, 20.0f * ratio - 10.0f) * sin((20.0f * ratio - 11.125f) * c5)) / 2.0f
+            : (pow(2.0f, -20.0f * ratio + 10.0f) * sin((20.0f * ratio - 11.125f) * c5)) / 2.0f + 1.0f;
+    }
+
+
+    float easeInBounce(float ratio) {
+        return 1.0f - easeOutBounce(1.0f - ratio);
+    }
+
+    float easeOutBounce(float ratio) {
+        static constexpr float n1 = 7.5625f;
+        static constexpr float d1 = 2.75f;
+
+        if (ratio < 1.0f / d1) {
+            return n1 * ratio * ratio;
+        } else if (ratio < 2.0f / d1) {
+            return n1 * (ratio -= 1.5f / d1) * ratio + 0.75f;
+        } else if (ratio < 2.5f / d1) {
+            return n1 * (ratio -= 2.25f / d1) * ratio + 0.9375f;
+        } else {
+            return n1 * (ratio -= 2.625f / d1) * ratio + 0.984375f;
+        }
+    }
+
+    float easeInOutBounce(float ratio) {
+        return ratio < 0.5f
+            ? (1.0f - easeOutBounce(1.0f - 2.0f * ratio)) / 2.0f
+            : (1.0f + easeOutBounce(2.0f * ratio - 1.0f)) / 2.0f;
+    }
 
 }
