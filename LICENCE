@@ -6,7 +6,7 @@ Redistribution and use in source and binary forms,
 with or without modification, are permitted provided
 that the following conditions are met:
 
-	1.  Redistributions of source code must retain this
+	1.	Redistributions of source code must retain this
 		copyright notice in whole. Without any modification(s).
 		
 	2.	Redistributions in binary form must reproduce this
@@ -15,7 +15,7 @@ that the following conditions are met:
 	3.	Redistributions	must acknowledge the fact that this library
 		is created and maintained by the library owner. 
 		
-	4.  Redistributions must give credit if this library is used in
+	4.	Redistributions must give credit if this library is used in
 		production of a software.
 		
 	5.	In no event shall the library owner be liable for any direct,
